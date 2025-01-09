@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Length Converter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Length Converter</h1>
+    </header>
+    <main>
+        <label for="length-value">Value:</label>
+        <input type="number" id="length-value" placeholder="Enter value">
+        <label for="length-from">From:</label>
+        <select id="length-from">
+            <option value="meter">Meter</option>
+            <option value="kilometer">Kilometer</option>
+            <option value="centimeter">Centimeter</option>
+            <option value="inch">Inch</option>
+            <option value="foot">Foot</option>
+        </select>
+        <label for="length-to">To:</label>
+        <select id="length-to">
+            <option value="meter">Meter</option>
+            <option value="kilometer">Kilometer</option>
+            <option value="centimeter">Centimeter</option>
+            <option value="inch">Inch</option>
+            <option value="foot">Foot</option>
+        </select>
+        <button onclick="convertLength()">Convert</button>
+        <p id="length-result"></p>
+    </main>
+    <footer>
+        <p>© 2025 Unit Converter | All Rights Reserved</p>
+    </footer>
+    <script>
+        const lengthRates = {
+            meter: { meter: 1, kilometer: 0.001, centimeter: 100, inch: 39.37, foot: 3.281 },
+            kilometer: { meter: 1000, kilometer: 1, centimeter: 100000, inch: 39370.1, foot: 3280.84 },
+            centimeter: { meter: 0.01, kilometer: 0.00001, centimeter: 1, inch: 0.393701, foot: 0.0328084 },
+            inch: { meter: 0.0254, kilometer: 0.0000254, centimeter: 2.54, inch: 1, foot: 0.0833333 },
+            foot: { meter: 0.3048, kilometer: 0.0003048, centimeter: 30.48, inch: 12, foot: 1 },
+        };
+
+        function convertLength() {
+            const value = parseFloat(document.getElementById('length-value').value);
+            const from = document.getElementById('length-from').value;
+            const to = document.getElementById('length-to').value;
+            if (isNaN(value)) {
+                alert('Please enter a valid number!');
+                return;
+            }
+            const result = value * lengthRates[from][to];
+            document.getElementById('length-result').innerText = `${value} ${from} = ${result.toFixed(2)} ${to}`;
+        }
+    </script>
+</body>
+</html>
